@@ -55,7 +55,9 @@ if __name__ == "__main__":
     SECRET_TOKEN = os.getenv("SECRET_HMAC_KEY")
 
     # Simulated correct signature (for demonstration purposes, normally this would come from the request headers)
-    computed_hash = hmac.new(SECRET_TOKEN.encode(), payload, hashlib.sha256).hexdigest()
+    computed_hash = hmac.new(
+        SECRET_TOKEN.encode(), payload, hashlib.sha256  # flake8: noqa
+    ).hexdigest()
     # signature = f"sha256={computed_hash}"
     signature = (
         f"sha256=a6353e505082e0614d4f1760c1d25e523ee34141bd2d2e5ef1e4648fc1ed128b"

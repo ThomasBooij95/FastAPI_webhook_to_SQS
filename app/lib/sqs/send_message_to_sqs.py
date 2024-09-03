@@ -1,6 +1,5 @@
 import boto3
 from botocore.exceptions import ClientError
-import os
 
 
 def send_message_to_sqs(queue_name, message_body):
@@ -39,4 +38,4 @@ if __name__ == "__main__":
 
     response = send_message_to_sqs(queue_name, message_body)
     if response:
-        print(f"Message sent! Message ID: {response['MessageId']}")
+        print(f"Message sent! Message ID: {response}")

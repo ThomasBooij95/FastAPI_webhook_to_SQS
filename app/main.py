@@ -7,14 +7,12 @@ from lib.sqs.read_message_from_sqs import read_messages_from_queue
 from lib.utils import verify_signature
 from lib.sqs.send_message_to_sqs import send_message_to_sqs
 from docs.utils import get_description
-from lib.types import BroadcastResponse
 from fastapi import FastAPI, Response, Request
 from fastapi_cache.backends.redis import RedisBackend
 import uvicorn
 from dotenv import load_dotenv
 
 load_dotenv()
-print("Loaded env")
 
 
 @asynccontextmanager
@@ -58,7 +56,7 @@ async def webhook_listener(request: Request) -> Response:
     queue_name = "sd_webinargeek_subscriptions"
     message_body = str(await request.json())
     # payload = request.body()
-    # Simulated correct signature (for demonstration purposes, normally this would come from the request headers)
+    # Simulated correct signature (for demonstration purposes, normally this would come from the request headers) # flake8: noqa
     # computed_hash = hmac.new(SECRET_TOKEN.encode(), payload, hashlib.sha256).hexdigest()
     # signature = f"sha256={computed_hash}"
     # signature = (
@@ -84,9 +82,7 @@ async def webhook_head() -> Response:
 @app.get("/read_messages_in_queue")
 async def read_messages_in_queue() -> Response:
     queue_name = "sd_webinargeek_subscriptions"
-    bucket_name = "your-s3-bucket-name"
-    s3_file_key = "path/to/store/messages.txt"
-    messages = read_messages_from_queue(queue_name, bucket_name, s3_file_key)
+    messages = read_messages_from_queue(queue_name)
     return Response(
         f"You have reached the read messages endpoint. Messages:{messages}",
         status_code=200,

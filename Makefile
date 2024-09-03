@@ -48,3 +48,7 @@ deploy:
 
 lint:
 	flake8 . 
+
+export_requirements:
+	poetry export -f requirements.txt --output requirements.txt --without-hashes
+
