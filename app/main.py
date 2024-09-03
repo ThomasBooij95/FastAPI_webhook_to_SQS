@@ -53,6 +53,10 @@ async def health_check():
     env_variables = dict(os.environ)
     if "AWS_SECRET_ACCESS_KEY" not in env_variables:
         return Response("No AWS secret supplied")
+    if "BASIC_AUTH_USERNAME" not in env_variables:
+        return Response("No username supplied")
+    if "BASIC_AUTH_PASSWORD" not in env_variables:
+        return Response("No password supplied")
     return Response("Server is running and healthy!")
 
 

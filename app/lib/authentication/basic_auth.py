@@ -8,6 +8,8 @@ security = HTTPBasic()
 def basic_auth(credentials: HTTPBasicCredentials = Depends(security)):
     correct_username = os.getenv("BASIC_AUTH_USERNAME")
     correct_password = os.getenv("BASIC_AUTH_PASSWORD")
+    if not correct_password or not correct_username:
+        raise Exception("Correct username or password not present in env variables")
     if (
         credentials.username != correct_username
         or credentials.password != correct_password
