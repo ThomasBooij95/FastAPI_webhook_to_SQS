@@ -12,18 +12,11 @@ help:
 	@echo "  make env                  - Activate the poetry environment"
 	@echo "  make rs                   - Start the development server"
 	
-# start new Django project
 up:
 	docker compose up -d
 
-ssh-wg:
-	ssh root@stresslessdogs.booijanalytics.nl
-
 build:
 	docker build -t app ./
-
-run:
-	docker run -t port 5000:80 app
 
 start-network:
 	docker network create traefik-public
@@ -52,3 +45,5 @@ lint:
 export_requirements:
 	poetry export -f requirements.txt --output requirements.txt --without-hashes
 
+ssh:
+	ssh ${SSH_URL}

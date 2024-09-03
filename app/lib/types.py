@@ -17,5 +17,5 @@ class BroadcastResponse(BaseModel):
         exclude_none = True
 
     def dict(self, *args, **kwargs) -> Dict[str, Any]:
-        _ignored = kwargs.pop("exclude_none")  # type: ignore
+        _ignored = kwargs.pop("exclude_none") 
         return super().dict(*args, exclude_none=True, **kwargs)
