@@ -1,15 +1,21 @@
 import os
+from fastapi.security import HTTPBasicCredentials
 from redis.asyncio import Redis
 from fastapi_cache import FastAPICache
 from contextlib import asynccontextmanager
+from lib.authentication.basic_auth import basic_auth
 from lib.encryption import verify_signature
 from lib.sqs.read_message_from_sqs import read_messages_from_queue
 from lib.sqs.send_message_to_sqs import send_message_to_sqs
 from docs.utils import get_description
-from fastapi import FastAPI, Response, Request
+from fastapi import Depends, FastAPI, Response, Request
 from fastapi_cache.backends.redis import RedisBackend
 import uvicorn
 from dotenv import load_dotenv
+from fastapi.openapi.docs import get_swagger_ui_html
+
+
+app = FastAPI()
 
 
 load_dotenv()
@@ -76,13 +82,22 @@ async def webhook_head() -> Response:
 
 
 @app.get("/read_messages_in_queue")
-async def read_messages_in_queue() -> Response:
+async def read_messages_in_queue(username: str = Depends(basic_auth)) -> Response:
     queue_name = os.getenv("AWS_QUEUE_NAME")
     messages = read_messages_from_queue(queue_name)
     return Response(
         f"You have reached the read messages endpoint. Messages:{messages}",
         status_code=200,
     )
+
+
+# @app.get("/docs", include_in_schema=False)
+# async def custom_swagger_ui_html(
+#     credentials: HTTPBasicCredentials = Depends(basic_auth),
+# ):
+#     return get_swagger_ui_html(
+#         openapi_url=str(app.openapi_url), title=app.title + " - Swagger UI"
+#     )
 
 
 if __name__ == "__main__":
