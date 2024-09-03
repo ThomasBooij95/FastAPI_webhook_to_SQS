@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "webhook_service"
+version = "0.1.0"
+description = "Booij Analytics Webhook Service. Receives webhooks and posts them to an AQS SQS Queue."
+authors = ["Thomas Booij <thomas@booijanalytics.nl>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+fastapi = "^0.111.1"
+python-dotenv = "^1.0.1"
+pytz = "^2024.1"
+flake8 = "^7.1.0"
+redis = "^5.0.7"
+aioredis = "^2.0.1"
+fastapi-cache2 = "^0.2.2"
+debugpy = "^1.8.2"
+boto3 = "^1.35.10"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
