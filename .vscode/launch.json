@@ -1,0 +1,17 @@
+{
+    "configurations": [
+        {
+            "name": "Python: FastAPI",
+            "type": "python",
+            "request": "launch",
+            "module": "uvicorn",
+            "cwd": "${workspaceFolder}/app",
+            "args": [
+                "main:app",
+                "--reload",
+                "--port", //these arg are optional
+                "3003"
+            ]
+        }
+    ]
+}
