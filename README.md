@@ -110,7 +110,7 @@ Use the provided deploy.sh script to deploy the application to your VPS or serve
 
 ## Development
 
-You can either run the docker container locally, or use the poetry environment. After installing depencies with ```poetry install``` and activating the environment with ```poetry poetry shell```,
+You can either run the docker container locally, or use the poetry environment. After installing depencies with ```poetry install``` and activating the environment with ```poetry shell```,
 you can start the dev server either by running ```make dev```, or by using the debugger from VS Code with the supplied launch.json file. 
 
 When adding depencies using ```poetry add```, make sure to export them to the requirements.txt file with ```make export_requirements``` so that the dockerfile will pickup the new requirements.
@@ -118,4 +118,4 @@ When adding depencies using ```poetry add```, make sure to export them to the re
 
 ## Contributions
 
-
+If you feel like you could improve the functionality, please feel free to submit a pull request. 
