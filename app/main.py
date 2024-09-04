@@ -60,7 +60,6 @@ async def health_check():
     return Response("Server is running and healthy!")
 
 
-# @app.post("/stresslessdogs/webinargeek/subscriptions/webhook")
 @app.post("/webhook")
 async def webhook_listener(request: Request) -> Response:
     queue_name = os.getenv("AWS_QUEUE_NAME")
@@ -95,14 +94,7 @@ async def read_messages_in_queue(username: str = Depends(basic_auth)) -> Respons
     )
 
 
-# @app.get("/docs", include_in_schema=False)
-# async def custom_swagger_ui_html(
-#     credentials: HTTPBasicCredentials = Depends(basic_auth),
-# ):
-#     return get_swagger_ui_html(
-#         openapi_url=str(app.openapi_url), title=app.title + " - Swagger UI"
-#     )
-
-
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8001)
+    uvicorn.run(
+        app, host="0.0.0.0", port=8001
+    )  ## Makes it possible to use the debugger in VS-code.

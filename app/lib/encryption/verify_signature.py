@@ -25,22 +25,3 @@ def verify_signature(payload: bytes, signature: str | None) -> bool:
 
     # Securely compare the computed hash with the signature
     return hmac.compare_digest(expected_signature, str(signature))
-
-
-if __name__ == "__main__":
-    # Example JSON payload as a byte string
-    payload = b'"Hello World!"'
-    SECRET_TOKEN = str(os.getenv("SECRET_HMAC_KEY"))
-
-    # Simulated correct signature (for demonstration purposes, normally this would come from the request headers)
-    computed_hash = hmac.new(
-        SECRET_TOKEN.encode(), payload, hashlib.sha256  # flake8: noqa
-    ).hexdigest()
-    # signature = f"sha256={computed_hash}"
-    signature = (
-        "sha256=a6353e505082e0614d4f1760c1d25e523ee34141bd2d2e5ef1e4648fc1ed128b"
-    )
-
-    # Now, use the verify_signature function to check the signature
-    is_valid = verify_signature(payload, signature)
-    print("Is the signature valid?", is_valid)
