@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "webhook_service"
 version = "0.1.0"
-description = "Booij Analytics Webhook Service. Receives webhooks and posts them to an AQS SQS Queue."
+description = "FastAPI Webhook to AWS SQS Queue Service. Receives webhooks and posts them to an AQS SQS Queue."
 authors = ["Thomas Booij <thomas@booijanalytics.nl>"]
 readme = "README.md"
 
