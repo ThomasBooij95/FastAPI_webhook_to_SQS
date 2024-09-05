@@ -13,7 +13,7 @@ from fastapi_cache.backends.redis import RedisBackend
 import uvicorn
 from dotenv import load_dotenv
 from fastapi.openapi.docs import get_swagger_ui_html
-
+import json
 
 app = FastAPI()
 
@@ -63,7 +63,7 @@ async def health_check():
 @app.post("/webhook")
 async def webhook_listener(request: Request) -> Response:
     queue_name = os.getenv("AWS_QUEUE_NAME")
-    message_body = str(await request.json())
+    message_body = json.dumps(await request.json())
     signature = request.headers.get("signature")
     payload = await request.body()
     is_valid = verify_signature(payload, signature)
